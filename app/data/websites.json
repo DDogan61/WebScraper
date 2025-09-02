@@ -1,0 +1,40 @@
+[
+  {
+    "name": "hepsiburada",
+    "baseUrl": "https://www.hepsiburada.com/ara",
+    "queryParamKeys": [
+      "q"
+    ],
+    "joiner": "+",
+    "extraParams": ""
+  },
+  {
+    "name": "trendyol",
+    "baseUrl": "https://www.trendyol.com/sr",
+    "queryParamKeys": [
+      "q",
+      "qt",
+      "st"
+    ],
+    "joiner": "%20",
+    "extraParams": "os\u003d1"
+  },
+  {
+    "name": "amazon",
+    "baseUrl": "https://www.amazon.com.tr/s",
+    "queryParamKeys": [
+      "k"
+    ],
+    "joiner": "+",
+    "extraParams": ""
+  },
+  {
+    "name": "n11",
+    "baseUrl": "https://www.n11.com/arama",
+    "queryParamKeys": [
+      "q"
+    ],
+    "joiner": "+",
+    "extraParams": ""
+  }
+]
