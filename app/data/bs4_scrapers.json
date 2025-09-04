@@ -1,0 +1,60 @@
+[
+  {
+    "website": "trendyol",
+    "base_url": "https://www.trendyol.com",
+    "item_sel": "div.p-card-wrppr",
+    "title_sel": [
+      "span.prdct-desc-cntnr-ttl",
+      "span.prdct-desc-cntnr-name",
+      "div.product-desc-sub-text"
+    ],
+    "price_sel": [
+      "[data-test-id='price-current-price']",
+      "div.price-item.discounted",
+      "div.prc-box-dscntd"
+    ],
+    "link_sel": [
+      "a[href]"
+    ],
+    "reject_cookie_ids": [
+      "onetrust-reject-all-handler",
+      "onetrust-accept-btn-handler"
+    ]
+  },
+  {
+    "website": "amazon",
+    "base_url": "https://www.amazon.com.tr",
+    "item_sel": "div.s-result-item[data-asin]:not([data-asin=''])",
+    "title_sel": [
+      "h2 span"
+    ],
+    "price_sel": [
+      "span.a-price > span.a-offscreen"
+    ],
+    "link_sel": [
+      "h2 a[href]",
+      "a.a-link-normal[href]"
+    ],
+    "sponsored_sel": "span.sponsored-label-text",
+    "reject_cookie_ids": [
+      "sp-cc-rejectall-link",
+      "sp-cc-accept"
+    ],
+    "id_attr": "data-asin",
+    "dp_path": "/dp/{id}"
+  },
+  {
+    "website": "n11",
+    "base_url": "https://www.n11.com",
+    "item_sel": "li.column",
+    "title_sel": [
+      "h3.productName"
+    ],
+    "price_sel": [
+      "ins"
+    ],
+    "link_sel": [
+      "a[href]"
+    ]
+  }
+]

@@ -1,12 +1,9 @@
 from typing import List
 
+from app.scrapers.bs4_scraper import scrape_trendyol, scrape_amazon, scrape_n11
+from app.scrapers.sel_scraper import scrape_hepsiburada
 from app.utils.url_composer import load_websites, build_url
 from app.utils.product import Product
-
-from scrapers.az_scraper import scrape_amazon
-from scrapers.hb_scraper import scrape_hepsiburada
-from scrapers.n11_scraper import scrape_n11
-from scrapers.ty_scraper import scrape_trendyol
 
 SCRAPER_MAP = {
     "trendyol": scrape_trendyol,

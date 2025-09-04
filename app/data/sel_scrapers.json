@@ -1,0 +1,14 @@
+[
+  {
+    "website": "hepsiburada",
+    "base_url": "https://www.hepsiburada.com",
+    "item_sel": "a[class*=\"productCardLink\"][href]",
+    "title_attr": "title",
+    "root_xpath": "./ancestor::div[contains(@class,\"productCard-module_productCardRoot\")][1]",
+    "brand_sel": "span[class^=\"title-module_brandText__\"]",
+    "price_sel": [
+      "[data-test-id^=\"final-price\"]",
+      "div[class^=\"price-module_finalPrice__\"]"
+    ]
+  }
+]
