@@ -15,7 +15,7 @@ venv\Scripts\activate # Windows
 3. Bağımlılıkları yükleyin.
 pip install -r requirements.txt
 
-4. Programı çalıştırın. (Birini seç)
+4. Programı çalıştırın.
 python server.py
 
 5. Tarayıcıya git.
