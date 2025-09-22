@@ -1,25 +1,42 @@
-:root { --gap: 16px; }
-* { box-sizing: border-box; }
+/* Global değişken tanımları */
+:root { --gap: 16px; } /* Genel boşluk (margin/padding) için kullanılacak değişken */
+* { box-sizing: border-box; } /* Her elementin boyut hesaplamasında border ve padding dahil olsun */
 
-body {
-  margin: 0; min-height: 100dvh; display: grid; place-items: center;
+body { /* Sayfa genel ayarları */
+  margin: 0;
+  min-height: 100dvh; /* Tüm ekran yüksekliğini kapla */
+  display: grid; /* İçeriği ortalamak için grid kullan */
+  place-items: center; /* Merkeze koy */
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: #f6f7fb;
+  background: #f6f7fb; /* Açık gri arka plan */
 }
+
+/* Kart görünümü, kart bütün elemanları içinde barındırır (arama barları, butonlar, tablo) */
 .card {
-  background: #fff; padding: 24px; border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  width: min(560px, 92vw);
+  background: #fff; /* Beyaz arka plan */
+  padding: 24px; /* İç boşluk */
+  border-radius: 16px; /* Köşeleri yuvarlat */
+  box-shadow: 0 10px 30px rgba(0,0,0,.08); /* Hafif gölge efekti */
+  width: min(560px, 92vw); /* Ekrana sığacak maksimum genişlik */
 }
-h2 { margin: 0 0 var(--gap); font-weight: 650; font-size: 22px; }
-form { display: flex; gap: 10px; }
-input[type="text"] {
-  flex: 1; padding: 12px 14px; border: 1px solid #dcdfe4; border-radius: 10px;
-  font-size: 16px; outline: none;
+h2 { margin: 0 0 var(--gap); font-weight: 650; font-size: 22px; } /* Başlık (Search for any item!) */
+
+form { display: flex; gap: 10px; } /* Form arama çubuğu ve buton hizalanması aynı sırada */
+
+input[type="text"] { /* Arama kutusu */
+  flex: 1; /* Mevcut alanı kaplasın, diğer elemanlardan kalan tüm alanı kaplasın */
+  padding: 12px 14px;
+  border: 1px solid #dcdfe4;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none; /* Focus çerçevesini kaldır */
 }
+ /* İmleç arama kutusunun üzerine gelince mavi renk + mavi gölge alsın. */
 input[type="text"]:focus { border-color: #6b8afd; box-shadow: 0 0 0 3px rgba(107,138,253,.15); }
-button {
+
+button { /* Buton */
   padding: 12px 16px; border: 0; border-radius: 10px; cursor: pointer;
   font-size: 16px; font-weight: 600; background: #6b8afd; color: #fff;
 }
-button:hover { filter: brightness(0.95); }
+
+button:hover { filter: brightness(0.95); } /* Buton üzerine gelindiğinde brightness arttır. */

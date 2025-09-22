@@ -1,34 +1,37 @@
 <head>
     <meta charset="utf-8"/>
     <title>Search</title>
+    <!-- CSS dosyası bağlama -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v=6) }}">
 </head>
 <body>
 <div class="card">
     <h2>Search for any item!</h2>
 
-    <!-- Search-only form (no site checkboxes here) -->
+    <!-- Ana arama formu -->
     <form method="get" action="/" style="display:flex; gap:12px; width:100%; margin-bottom:12px;">
+        <!-- Kullanıcının yazdığı arama sorgusu -->
         <input type="text" name="q" placeholder="" value="{{ query or '' }}"
                style="flex:1; padding:10px; border:1px solid #dcdfe4; border-radius:10px;">
         <button type="submit">Search</button>
     </form>
 
     {% if results is defined %}
-    <!-- Filters appear only AFTER the first search -->
+    <!-- 🔧 Filtre formu (arama yapıldıktan sonra görünüyor) -->
     <form method="get" action="/" style="display:flex; flex-direction:column; gap:12px;">
 
-        <!-- keep the current query and mark that user touched site filters -->
+        <!-- Kullanıcı aynı query'i korusun + site seçicilerin dokunulduğunu işaretle -->
         <input type="hidden" name="q" value="{{ query }}">
         <input type="hidden" name="site_sel" value="1">
 
-        <!-- Website selection checkboxes -->
+        <!-- Site seçim kutuları -->
         <div style="display:flex; flex-wrap:wrap; gap:8px; width:100%;">
             {% set all_sites = ['amazon', 'hepsiburada', 'n11', 'trendyol'] %}
             {% set selected = selected_sites if selected_sites is defined else all_sites %}
             {% for site in all_sites %}
             <label style="padding:6px 12px; border:1px solid #dcdfe4; border-radius:8px;
                           cursor:pointer; background:#f9f9f9;">
+                <!-- Checkbox: site seçili mi kontrol et -->
                 <input type="checkbox" name="site" value="{{ site }}"
                        {% if site in selected %}checked{% endif %}
                        style="margin-right:6px;">
@@ -37,15 +40,18 @@
             {% endfor %}
         </div>
 
-        <!-- Ban keywords + buttons -->
+        <!-- Ban keywords alanı + filtre butonu -->
         <div style="display:flex; gap:8px; align-items:center;">
+            <!-- Ban kelimeler inputu -->
             <input type="text" name="ban" placeholder="Ban keywords (e.g., case pen protector)"
                    value="{{ ban or '' }}"
                    style="flex:1; padding:10px; border:1px solid #dcdfe4; border-radius:10px;">
             <button type="submit">Apply Filters</button>
+            <!-- Filtreleri temizle linki -->
             <a href="/?q={{ query | urlencode }}" style="color:#666; text-decoration:none;">Clear Filters</a>
         </div>
 
+        <!-- Aktif ban kelimelerini göster -->
         {% if ban %}
         <div style="margin-top:0; color:#666;">Active bans:
             {% for w in ban.split() %}
@@ -57,12 +63,16 @@
         {% endif %}
     </form>
 
+    <!-- Sonuç tablosu -->
     <div style="margin-top:16px;">
         {% if results %}
+        <!-- Sonuç sayısını göster -->
         <div style="margin-bottom:8px; color:#666;">
             Showing {{ results|length }} result{{ '' if results|length == 1 else 's' }} for:
             <strong>{{ query }}</strong>{% if ban %} &nbsp;after filters{% endif %}
         </div>
+
+        <!-- Sonuçların listelendiği tablo -->
         <table style="width:100%; border-collapse: collapse;">
             <thead>
             <tr>
@@ -76,10 +86,15 @@
             <tbody>
             {% for p in results %}
             <tr>
+                <!-- Sonuç index numarası -->
                 <td style="padding:8px; border-bottom:1px solid #f3f3f3;">{{ loop.index }}</td>
+                <!-- Ürün ismi -->
                 <td style="padding:8px; border-bottom:1px solid #f3f3f3;">{{ p.name }}</td>
+                <!-- Fiyat -->
                 <td style="padding:8px; border-bottom:1px solid #f3f3f3; white-space:nowrap;">{{ p.price_text }}</td>
+                <!-- Site adı -->
                 <td style="padding:8px; border-bottom:1px solid #f3f3f3;">{{ p.website }}</td>
+                <!-- Ürün linki -->
                 <td style="padding:8px; border-bottom:1px solid #f3f3f3;">
                     <a href="{{ p.url }}" target="_blank" rel="noopener">Open</a>
                 </td>
@@ -88,11 +103,12 @@
             </tbody>
         </table>
         {% else %}
+        <!-- Hiç ürün bulunamadı mesajı -->
         <div style="margin-top:8px; color:#a00;">No items found.</div>
         {% endif %}
     </div>
 
-    <!-- Floating Export Button -->
+    <!-- CSV olarak dışa aktar butonu -->
     <div style="position:fixed; bottom:20px; right:20px;">
         <a
                 href="/export?q={{ query|urlencode }}&ban={{ (ban or '')|urlencode }}&site_sel=1{% for s in selected_sites %}&site={{ s }}{% endfor %}"

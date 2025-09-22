@@ -1,7 +1,9 @@
 import json
 from dataclasses import dataclass, field
-from enum import IntEnum
 from typing import List, Optional
+
+from app.utils.log_config import logger
+
 
 @dataclass
 class Bs4Scraper:
@@ -28,20 +30,20 @@ class SelScraper:
     price_sel: List[str] = field(default_factory=list)
 
 
-class Bs4ScraperIndex(IntEnum):
-    TRENDYOL = 0
-    AMAZON = 1
-    N11 = 2
-
-class SelScraperIndex(IntEnum):
-    HEPSIBURADA = 0
-
 def load_bs4_scrapers(path: str) -> list[Bs4Scraper]:
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return [Bs4Scraper(**entry) for entry in data]
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return [Bs4Scraper(**entry) for entry in data]
+    except Exception as e:
+        logger.error(f"Failed to load BS4 scrapers from {path}: {e}", exc_info=True)
+        return []
 
 def load_sel_scrapers(path: str) -> list[SelScraper]:
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return [SelScraper(**entry) for entry in data]
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return [SelScraper(**entry) for entry in data]
+    except Exception as e:
+        logger.error(f"Failed to load SEL scrapers from {path}: {e}", exc_info=True)
+        return []
